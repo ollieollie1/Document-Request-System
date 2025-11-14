@@ -4,18 +4,35 @@ include 'db.php';
 $student = $_POST['student-number'];
 $password = $_POST['password'];
 
-// Hash password for security
+// Check if student already exists
+$sql = "SELECT * FROM users WHERE student_number = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $student);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    // Student already registered
+    header("Location: register.html?error=exists");
+    exit();
+}
+
+// Hash password
 $hashed = password_hash($password, PASSWORD_DEFAULT);
 
-// Insert into database
+// Insert new user
 $sql = "INSERT INTO users (student_number, password) VALUES (?, ?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $student, $hashed);
 
 if ($stmt->execute()) {
-    echo "<script>alert('Registration successful!'); window.location='login.html';</script>";
+    // Registration success → return to login page
+    header("Location: login.html?success=registered");
+    exit();
 } else {
-    echo "<script>alert('Error: Student number already exists or server error.'); window.location='register.html';</script>";
+    // Insert failed
+    header("Location: register.html?error=failed");
+    exit();
 }
 
 $stmt->close();
