@@ -3,6 +3,13 @@ include 'db.php';
 
 $student = $_POST['student-number'];
 $password = $_POST['password'];
+$confirm = $_POST['confirm-password'];
+
+// Validate passwords match (extra backend safety)
+if ($password !== $confirm) {
+    header("Location: register.html?error=nomatch");
+    exit();
+}
 
 // Check if student already exists
 $sql = "SELECT * FROM users WHERE student_number = ?";
@@ -12,7 +19,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    // Student already registered
+    // Already registered
     header("Location: register.html?error=exists");
     exit();
 }
@@ -20,17 +27,17 @@ if ($result->num_rows > 0) {
 // Hash password
 $hashed = password_hash($password, PASSWORD_DEFAULT);
 
-// Insert new user
+// Insert user
 $sql = "INSERT INTO users (student_number, password) VALUES (?, ?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $student, $hashed);
 
 if ($stmt->execute()) {
-    // Registration success → return to login page
+    // Success → go to login page
     header("Location: login.html?success=registered");
     exit();
 } else {
-    // Insert failed
+    // Insert error
     header("Location: register.html?error=failed");
     exit();
 }
