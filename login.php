@@ -1,5 +1,6 @@
 <?php
 include 'db.php';
+session_start();
 
 $student = $_POST['student-number'];
 $password = $_POST['password'];
@@ -16,12 +17,21 @@ if ($result->num_rows === 1) {
     $row = $result->fetch_assoc();
 
     if (password_verify($password, $row['password'])) {
-        echo "<script>alert('Login successful!'); window.location='studenthomepage.html';</script>";
+
+        // Save login session
+        $_SESSION['student_number'] = $row['student_number'];
+        $_SESSION['fullname'] = $row['fullname']; // if you have it
+
+        // Redirect to homepage
+        header("Location: studenthomepage.html");
+        exit();
     } else {
-        echo "<script>alert('Incorrect password'); window.location='login.html';</script>";
+        header("Location: login.html?error=wrongpassword");
+        exit();
     }
 } else {
-    echo "<script>alert('Student not found'); window.location='login.html';</script>";
+    header("Location: login.html?error=notfound");
+    exit();
 }
 
 $stmt->close();
