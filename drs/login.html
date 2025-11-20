@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/loginregister.css">
+    <title>Login Page</title>
+</head>
+<body>
+    <div class="login-container">
+        <h1>SCC DRS</h1>
+        <h4>Log in to continue</h4>
+        <form>
+            <!-- Student Number -->
+            <div class="form-group">
+                <label for="student-number">Student Number</label>
+                <input type="text" id="student-number" name="student-number" required>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" required>
+                    <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('password', this)" style="display: none;"></i>
+                </div>
+            </div>
+
+            <button type="submit">Login</button><br>
+            <a href="register.html">Create an account</a> ○
+            <a href="guest.html">Join as guest</a>
+        </form>
+    </div>
+
+    <script>
+    // Working toggle for eye icon
+    function togglePassword(id, icon) {
+        const input = document.getElementById(id);
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    }
+
+    const passwordInput = document.getElementById('password');
+    const toggleIcon = document.querySelector('.toggle-password');
+    
+    passwordInput.addEventListener('input', () => {
+        if (passwordInput.value.length > 0) {
+            toggleIcon.style.display = 'block';
+        } else {
+            toggleIcon.style.display = 'none';
+        }
+    });
+    </script>
+    <script src="js/login.js"></script>
+</body>
+</html>
