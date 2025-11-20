@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCC DRS Homepage</title>
+  <link rel="stylesheet" href="css/studentpage.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="topbar">
+      <div class="logo">SCC DRS</div>   
+       <nav class="nav-links">
+         <center><a href="studenthome.html" style="background-color: #992424;"><i class="fa-solid fa-house"></i><small>Home</small></a></center>
+         <center><a href="documents.html"><i class="fa-regular fa-file-lines"></i><small>Documents</small></a></center>
+        </nav>
+        
+        <div class="profile-menu" id="profile-menu">
+            <img src="https://static.wikia.nocookie.net/meme/images/2/2a/SYBAUGuy.jpg/revision/latest?cb=20250607112912" alt="Profile Picture" class="profile-icon">
+            <span id="profile-name">Ollie</span>
+            
+            <div class="dropdown" id="dropdown-menu">
+              <div class="dropdown-header">                 
+                  <div class="user-main-info">
+                    <img src="https://static.wikia.nocookie.net/meme/images/2/2a/SYBAUGuy.jpg/revision/latest?cb=20250607112912" 
+                        alt="Profile Picture" 
+                        class="profile-icon">    
+
+                    <div class="user-text-info">
+                      <p class="full-name"><strong id="full-name">Ollie D. Goat</strong></p>
+                      <p class="user-email" id="user-email">wowow.scc@gmail.com</p>
+                    </div>
+                  </div> 
+                </div>   
+              <div class="dropdown-info">
+                  <p><small>Student ID</small> <br><span id="user-id">20227123</span></p>
+                  <p><small>Course</small> <br><span id="user-course">Bachelor of Science in Information Technology (BSIT)</span></p>
+                  <p><small>Year</small> <br><span id="user-year">3rd Year</span></p><br>
+              </div>
+              <button href="#" class="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; Logout</button>
+            </div>     
+        </div>
+  </header>
+
+  <!-- Main Section -->
+  <main class="main-content">
+    <div class="content-wrapper">
+      <h1>Welcome to SCC Document Request System</h1>
+      <p>This is your main dashboard area. You can view your requested documents, track their status, or request new ones here.</p>
+
+      <!-- Big Request Button -->
+      <button href="documents.html" class="main-request-btn">Request New Document</button>
+      <button href="#" class="main-track-btn">Track Requests</button>
+    </div>
+
+    <div class="content-wrapper">
+      <!-- Requested Documents Section -->
+      <h3>Requested Documents</h3><br>
+      <section class="requests-section">        
+        <div class="no-requests">
+          <p class="no-request-title">No requests yet</p>
+          <p class="no-request-sub">You haven't made any document requests yet.</p>
+        </div>
+      </section>
+    </div>  
+    <div class="content-wrapper">
+      <section class="how-it-works">
+        <h2>How It Works</h2>
+        <p class="how-subtext">Request your documents in just a few simple steps</p>
+
+        <div class="how-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h4>Fill Out Request Form</h4>
+                <p>Provide your personal information and select the documents you need.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h4>Make Payment</h4>
+                <p>Securely pay for your documents using our integrated payment system.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h4>Track & Pickup</h4>
+                <p>Monitor your request status and pick up when ready.</p>
+            </div>
+        </div>
+      </section>
+    </div>  
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h3>St. Clare College Document Request System</h3>
+            <p>A Thesis Submitted to the Faculty <br>of Institute of Computer Studies <br><br> In Partial Fulfillment of the requirement <br>
+              for the Degree of Bachelor <br> of Science in Computer Science</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Request Document</a></li>
+                <li><a href="#">Track Request</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Documents</h4>
+            <ul>
+                <li>Transcript of Records</li>
+                <li>Certificate of Enrollment</li>
+                <li>Diploma</li>
+                <li>Good Moral Certificate</li>
+                <li>Certificate of Graduation</li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact Us</h4>
+            <ul>
+                <li>St. Clare College of Caloocan City</li>
+                <li>(02) 1234-5678</li>
+                <li>registrar@stclare.edu.ph</li>
+            </ul>
+        </div>
+    </div>
+    <p class="footer-copy">© 2025 Bscs Group4A. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const activeUser = JSON.parse(localStorage.getItem("activeUser"));
+    if (!activeUser) window.location.href = "index.html";
+
+    // Show student number in profile
+    document.getElementById("profile-name").textContent = activeUser.student;
+    document.getElementById("user-id").textContent = activeUser.student;
+
+    // Logout
+    document.querySelector(".logout-btn").onclick = () => {
+        localStorage.removeItem("activeUser");
+        window.location.href = "index.html";
+    };
+  </script>
+  <script src="js/forfunctions.js"></script>
+</body>
+</html>

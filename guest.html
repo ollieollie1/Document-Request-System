@@ -13,15 +13,21 @@
 <body>
     <div class="login-container">
         <h1>SCC DRS</h1>
-        <h4>Create an Account</h4>
+        <h4>Login as Guest</h4>
+        
         <form id="registerForm">
-            <!-- Student Number + Validate -->
             <div class="form-group">
                 <label for="student-number">Student Number</label>
                 <div class="validate-wrapper">
                     <input type="text" id="student-number" name="student-number" required>
-                    <div style="margin-left: 15px;"><small> 
-                        Note: A valid student number is required to create an account. If you don’t have one, you may join as a guest instead.</small></div>
+                    <small> Note: This is only for those who have a student number but currently not enrolled. Please skip if you have no student number</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="date-graduated">Date Graduated</label>
+                <div class="password-wrapper">
+                    <input type="date" id="date-graduated" name="date" required>
                 </div>
             </div>
 
@@ -88,6 +94,5 @@
         }
     });
     </script>
-    <script src="js/register.js"></script>
 </body>
 </html>
